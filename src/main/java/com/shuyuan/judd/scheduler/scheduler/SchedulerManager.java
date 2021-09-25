@@ -104,7 +104,7 @@ public class SchedulerManager implements SchedulingConfigurer {
     }
 
     private Runnable getTaskExecutor(ScheduleTaskDo task) {
-        log.info("准备Runnable，task: {} ", task);
+        log.info("准备任务执行器，task: {} ", task);
         //return () -> log.info("执行task: {}", task);
         return () -> executeTask(task);
     }
