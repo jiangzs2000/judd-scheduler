@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shuyuan.judd.scheduler.dataaccess.mapper.ExecutionLockDoMapper">
+	<select id="getCurentLock" resultType="com.shuyuan.judd.scheduler.dataaccess.dataobject.ExecutionLockDo"><![CDATA[
+        SELECT *, (CASE WHEN expire_time > NOW() THEN false WHEN expire_time <= NOW() THEN true END) as expired FROM execution_lock;
+    ]]></select>
+
+	<update id="requireLock">
+		UPDATE execution_lock u
+		<set>
+			<if test="lock.owner!=null and lock.owner.trim()!=''">u.owner=#{lock.owner},</if>
+			<if test="lock.expireTime!=null">u.expire_time=#{lock.expireTime},</if>
+			u.update_time=NOW()
+		</set>
+		WHERE u.owner=#{oldOwner} AND u.expire_time = #{oldExpireTime};
+	</update>
+
+</mapper>

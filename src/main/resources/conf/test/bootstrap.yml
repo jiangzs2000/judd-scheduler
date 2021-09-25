@@ -1,0 +1,27 @@
+server:
+  port: 7017
+management:
+  port: 7018
+  add-application-context-header: false
+  security:
+    enabled: false
+#去哪儿找配置文件，只能写在bootstrap里（比application先加载）
+#git里配置文件为${spring.application.name}-${spring.cloud.config.profile}.properties
+#profile类型
+spring:
+  application:
+    name: com.shuyuan.judd.scheduler
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.202.32.4:8848
+      config:
+        server-addr: 10.202.32.4:8848
+        file-extension: yaml
+
+endpoints:
+  shutdown:
+    enabled: true
+    sensitive: false

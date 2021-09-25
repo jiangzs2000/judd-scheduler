@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shuyuan.judd.scheduler.dataaccess.mapper.ScheduleTaskDoMapper">
+    <!--新增ScheduleTaskDo记录-->
+    <insert id="insert"
+            parameterType="com.shuyuan.judd.scheduler.dataaccess.dataobject.ScheduleTaskDo"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		INSERT  INTO schedule_task(pre_task_id,task_name,cron,sub_task,create_user,create_time,status)
+					  VALUES (#{preTaskId},#{taskName},#{cron},#{subTask},#{createUser},NOW(),1);
+	</insert>
+
+    <!--修改ScheduleTaskDo记录-->
+    <update id="update" parameterType="com.shuyuan.judd.scheduler.dataaccess.dataobject.ScheduleTaskDo">
+        UPDATE schedule_task u
+        <set>
+            <if test="preTaskId!=null ">u.pre_task_id=#{preTaskId},</if>
+            <if test="taskName!=null and taskName.trim()!=''">u.task_name=#{taskName},</if>
+            <if test="cron!=null and cron.trim()!=''">u.cron=#{cron},</if>
+            <if test="subTask!=null and subTask.trim()!=''">u.sub_task=#{subTask},</if>
+            <if test="updateUser!=null and updateUser.trim()!=''">u.update_user=#{updateUser},</if>
+            u.update_time=NOW()
+        </set>
+        WHERE u.id=#{id};
+    </update>
+
+    <update id="remove">
+        UPDATE schedule_task u
+        <set>
+            status=0, update_time = NOW()
+        </set>
+        WHERE u.id=#{id};
+    </update>
+
+    <select id="getTaskWithCronPresent" resultType="com.shuyuan.judd.scheduler.dataaccess.dataobject.ScheduleTaskDo">
+        SELECT * FROM schedule_task u where u.cron is NOT NULL AND u.status=1;
+    </select>
+
+    <select id="getTaskWithPreTaskId" resultType="com.shuyuan.judd.scheduler.dataaccess.dataobject.ScheduleTaskDo">
+        SELECT * FROM schedule_task u where u.pre_task_id = #{preTaskId} AND u.status=1;
+    </select>
+
+    <select id="getNewestTime" resultType="com.shuyuan.judd.scheduler.dataaccess.dataobject.ScheduleTaskNewestTime">
+        SELECT max(create_time) as newest_create_time, max(update_time) as newest_update_time FROM schedule_task u WHERE u.status=1;
+    </select>
+
+    <select id="getTaskAfterTimeWithCronPresent" resultType="com.shuyuan.judd.scheduler.dataaccess.dataobject.ScheduleTaskDo">
+        SELECT * FROM schedule_task u WHERE 1=1
+        <choose>
+            <when test="newestCreateTime!=null and newestUpdateTime!=null">
+                AND (<![CDATA[create_time > #{newestCreateTime}]]> OR <![CDATA[update_time > #{newestUpdateTime}]]>)
+            </when>
+            <when test="newestCreateTime!=null and newestUpdateTime==null">
+                AND (<![CDATA[create_time > #{newestCreateTime}]]> OR update_time IS NOT NULL)
+            </when>
+        </choose>
+    </select>
+
+    <select id="getByQuery"
+            parameterType="com.shuyuan.judd.scheduler.model.portal.ScheduleTaskQuery"
+            resultType="com.shuyuan.judd.scheduler.dataaccess.dataobject.ScheduleTaskDo">
+        SELECT
+        *
+        FROM
+        schedule_task
+        WHERE
+        status=1
+        <if test="startDate!=null and startDate.trim()!=''">
+            AND <![CDATA[    create_time >=#{startDate}]]>
+        </if>
+        <if test="endDate!=null and endDate.trim()!=''">
+            AND <![CDATA[    create_time <#{endDate}]]>
+        </if>
+        <if test="search!=null and search.trim() != ''">
+            AND (task_name LIKE CONCAT('%',#{search},'%')
+        </if>
+        order by create_time desc
+        <if test="pageSize!=null and pageSize > 0">
+            LIMIT #{page},#{pageSize}
+        </if>
+    </select>
+    <select id="getCountByQuery"
+            parameterType="com.shuyuan.judd.client.model.request.portal.order.WithdrawOrderQuery"
+            resultType="map">
+        SELECT
+        count(id) as count
+        FROM
+        schedule_task
+        WHERE
+        status=1
+        <if test="startDate!=null and startDate.trim()!=''">
+            AND <![CDATA[    create_time >=#{startDate}]]>
+        </if>
+        <if test="endDate!=null and endDate.trim()!=''">
+            AND <![CDATA[    create_time <#{endDate}]]>
+        </if>
+        <if test="search!=null and search.trim() != ''">
+            AND (task_name LIKE CONCAT('%',#{search},'%')
+        </if>
+    </select>
+
+</mapper>
