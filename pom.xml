@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.shuyuan.judd</groupId>
+        <groupId>com.monefish.judd</groupId>
         <artifactId>judd-parent</artifactId>
         <version>1.0.0</version>
     </parent>
@@ -16,7 +16,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.shuyuan.judd</groupId>
+            <groupId>com.monefish.judd</groupId>
             <artifactId>judd-client</artifactId>
             <version>1.0.0</version>
             <exclusions>
@@ -27,7 +27,7 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>com.shuyuan.judd</groupId>
+            <groupId>com.monefish.judd</groupId>
             <artifactId>judd-base</artifactId>
             <version>1.0.0</version>
         </dependency>
@@ -72,7 +72,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.shuyuan.judd.scheduler.ServiceTaskSchedulerApplication</mainClass>
+                    <mainClass>com.monefish.judd.scheduler.ServiceTaskSchedulerApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

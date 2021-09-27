@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shuyuan.judd.scheduler.dataaccess.mapper.ScheduleLogDoMapper">
+<mapper namespace="com.monefish.judd.scheduler.dataaccess.mapper.ScheduleLogDoMapper">
     <!--新增ScheduleLogDo记录-->
-    <insert id="insert" parameterType="com.shuyuan.judd.scheduler.dataaccess.dataobject.ScheduleLogDo">
+    <insert id="insert" parameterType="com.monefish.judd.scheduler.dataaccess.dataobject.ScheduleLogDo">
 		INSERT  INTO schedule_log(log_no,task_id,pre_log_no,progress,completed,create_time,status)
 					  VALUES (#{logNo},#{taskId},#{preLogNo},#{progress},#{completed},NOW(),1);
 	</insert>
 
     <!--修改ScheduleLogDo记录-->
-    <update id="update" parameterType="com.shuyuan.judd.scheduler.dataaccess.dataobject.ScheduleLogDo">
+    <update id="update" parameterType="com.monefish.judd.scheduler.dataaccess.dataobject.ScheduleLogDo">
         UPDATE schedule_log u
         <set>
             <if test="taskId!=null ">u.task_id=#{taskId},</if>
@@ -31,13 +31,13 @@
         WHERE u.log_no=#{scheduleLogDo.logNo} and progress=#{oldProgress} and status=1;
     </update>
 
-    <select id="getByLogNo" resultType="com.shuyuan.judd.scheduler.dataaccess.dataobject.ScheduleLogDo">
+    <select id="getByLogNo" resultType="com.monefish.judd.scheduler.dataaccess.dataobject.ScheduleLogDo">
         SELECT * FROM schedule_log u where log_no = #{logNo} AND u.status=1;
     </select>
 
     <select id="getByQuery"
-            parameterType="com.shuyuan.judd.scheduler.model.portal.ScheduleLogQuery"
-            resultType="com.shuyuan.judd.scheduler.dataaccess.dataobject.ScheduleLogDo">
+            parameterType="com.monefish.judd.scheduler.model.portal.ScheduleLogQuery"
+            resultType="com.monefish.judd.scheduler.dataaccess.dataobject.ScheduleLogDo">
         SELECT
         *
         FROM
@@ -69,7 +69,7 @@
         </if>
     </select>
     <select id="getCountByQuery"
-            parameterType="com.shuyuan.judd.client.model.request.portal.order.WithdrawOrderQuery"
+            parameterType="com.monefish.judd.client.model.request.portal.order.WithdrawOrderQuery"
             resultType="map">
         SELECT
         count(log_no) as count

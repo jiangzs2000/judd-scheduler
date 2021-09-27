@@ -10,7 +10,7 @@ management:
 #profile类型
 spring:
   application:
-    name: com.shuyuan.judd.scheduler
+    name: com.monefish.judd.scheduler
   main:
     allow-bean-definition-overriding: true
   cloud:

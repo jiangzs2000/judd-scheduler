@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shuyuan.judd.scheduler.dataaccess.mapper.ScheduleTaskDoMapper">
+<mapper namespace="com.monefish.judd.scheduler.dataaccess.mapper.ScheduleTaskDoMapper">
     <!--新增ScheduleTaskDo记录-->
     <insert id="insert"
-            parameterType="com.shuyuan.judd.scheduler.dataaccess.dataobject.ScheduleTaskDo"
+            parameterType="com.monefish.judd.scheduler.dataaccess.dataobject.ScheduleTaskDo"
             useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 		INSERT  INTO schedule_task(pre_task_id,task_name,cron,sub_task,create_user,create_time,status)
 					  VALUES (#{preTaskId},#{taskName},#{cron},#{subTask},#{createUser},NOW(),1);
 	</insert>
 
     <!--修改ScheduleTaskDo记录-->
-    <update id="update" parameterType="com.shuyuan.judd.scheduler.dataaccess.dataobject.ScheduleTaskDo">
+    <update id="update" parameterType="com.monefish.judd.scheduler.dataaccess.dataobject.ScheduleTaskDo">
         UPDATE schedule_task u
         <set>
             <if test="preTaskId!=null ">u.pre_task_id=#{preTaskId},</if>
@@ -32,19 +32,19 @@
         WHERE u.id=#{id};
     </update>
 
-    <select id="getTaskWithCronPresent" resultType="com.shuyuan.judd.scheduler.dataaccess.dataobject.ScheduleTaskDo">
+    <select id="getTaskWithCronPresent" resultType="com.monefish.judd.scheduler.dataaccess.dataobject.ScheduleTaskDo">
         SELECT * FROM schedule_task u where u.cron is NOT NULL AND u.status=1;
     </select>
 
-    <select id="getTaskWithPreTaskId" resultType="com.shuyuan.judd.scheduler.dataaccess.dataobject.ScheduleTaskDo">
+    <select id="getTaskWithPreTaskId" resultType="com.monefish.judd.scheduler.dataaccess.dataobject.ScheduleTaskDo">
         SELECT * FROM schedule_task u where u.pre_task_id = #{preTaskId} AND u.status=1;
     </select>
 
-    <select id="getNewestTime" resultType="com.shuyuan.judd.scheduler.dataaccess.dataobject.ScheduleTaskNewestTime">
+    <select id="getNewestTime" resultType="com.monefish.judd.scheduler.dataaccess.dataobject.ScheduleTaskNewestTime">
         SELECT max(create_time) as newest_create_time, max(update_time) as newest_update_time FROM schedule_task u WHERE u.status=1;
     </select>
 
-    <select id="getTaskAfterTimeWithCronPresent" resultType="com.shuyuan.judd.scheduler.dataaccess.dataobject.ScheduleTaskDo">
+    <select id="getTaskAfterTimeWithCronPresent" resultType="com.monefish.judd.scheduler.dataaccess.dataobject.ScheduleTaskDo">
         SELECT * FROM schedule_task u WHERE 1=1
         <choose>
             <when test="newestCreateTime!=null and newestUpdateTime!=null">
@@ -57,8 +57,8 @@
     </select>
 
     <select id="getByQuery"
-            parameterType="com.shuyuan.judd.scheduler.model.portal.ScheduleTaskQuery"
-            resultType="com.shuyuan.judd.scheduler.dataaccess.dataobject.ScheduleTaskDo">
+            parameterType="com.monefish.judd.scheduler.model.portal.ScheduleTaskQuery"
+            resultType="com.monefish.judd.scheduler.dataaccess.dataobject.ScheduleTaskDo">
         SELECT
         *
         FROM
@@ -80,7 +80,7 @@
         </if>
     </select>
     <select id="getCountByQuery"
-            parameterType="com.shuyuan.judd.client.model.request.portal.order.WithdrawOrderQuery"
+            parameterType="com.monefish.judd.client.model.request.portal.order.WithdrawOrderQuery"
             resultType="map">
         SELECT
         count(id) as count

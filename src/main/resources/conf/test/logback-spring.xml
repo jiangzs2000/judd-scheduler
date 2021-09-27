@@ -67,7 +67,7 @@
         <appender-ref ref="FILE_ERROR"/>
     </logger>
 
-    <logger name="com.shuyuan.judd.scheduler" level="DEBUG" />
+    <logger name="com.monefish.judd.scheduler" level="DEBUG" />
 
     <root level="INFO">
         <appender-ref ref="FILE_INFO"/>

@@ -74,7 +74,7 @@ hystrix:
 
 #ribbon负载均衡算法
 com:
-  shuyuan:
+  monefish:
     judd:
       fundation:
         ribbon:
