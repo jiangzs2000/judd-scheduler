@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.monefish.judd</groupId>
         <artifactId>judd-parent</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.0</version> <!-- lookup parent from repository -->
     </parent>
 
     <artifactId>judd-scheduler</artifactId>
@@ -27,8 +27,8 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>com.monefish.judd</groupId>
-            <artifactId>judd-base</artifactId>
+            <groupId>com.monefish</groupId>
+            <artifactId>base</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>

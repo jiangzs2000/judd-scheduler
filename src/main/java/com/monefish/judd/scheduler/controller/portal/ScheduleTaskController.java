@@ -1,7 +1,7 @@
 package com.monefish.judd.scheduler.controller.portal;
 
-import com.monefish.judd.base.aops.ApiLog;
-import com.monefish.judd.base.model.Response;
+import com.monefish.base.aops.ApiLog;
+import com.monefish.base.model.Response;
 import com.monefish.judd.scheduler.model.portal.ScheduleTaskQuery;
 import com.monefish.judd.scheduler.model.portal.ScheduleTaskQueryResult;
 import com.monefish.judd.scheduler.service.ScheduleTaskService;

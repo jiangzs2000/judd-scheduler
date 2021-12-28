@@ -1,7 +1,7 @@
 package com.monefish.judd.scheduler.controller;
 
-import com.monefish.judd.base.aops.ApiLog;
-import com.monefish.judd.base.model.Response;
+import com.monefish.base.aops.ApiLog;
+import com.monefish.base.model.Response;
 import com.monefish.judd.client.model.scheduler.TaskNotification;
 import com.monefish.judd.scheduler.service.ScheduleLogService;
 import io.swagger.annotations.Api;

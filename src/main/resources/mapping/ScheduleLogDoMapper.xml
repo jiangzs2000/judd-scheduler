@@ -48,7 +48,7 @@
             AND <![CDATA[    create_time >=#{startDate}]]>
         </if>
         <if test="endDate!=null and endDate.trim()!=''">
-            AND <![CDATA[    create_time <#{endDate}]]>
+            AND <![CDATA[    create_time <=#{endDate}]]>
         </if>
         <if test="search!=null and search.trim() != ''">
             AND (name LIKE CONCAT('%',#{search},'%') OR ScheduleLogDo_name LIKE
@@ -81,7 +81,7 @@
             AND <![CDATA[    create_time >=#{startDate}]]>
         </if>
         <if test="endDate!=null and endDate.trim()!=''">
-            AND <![CDATA[    create_time <#{endDate}]]>
+            AND <![CDATA[    create_time <=#{endDate}]]>
         </if>
         <if test="search!=null and search.trim() != ''">
             AND (name LIKE CONCAT('%',#{search},'%') OR ScheduleLogDo_name LIKE

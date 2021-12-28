@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import com.monefish.judd.base.cache.CacheService;
-import com.monefish.judd.base.model.TraceIdHelper;
+import com.monefish.base.cache.CacheService;
+import com.monefish.base.model.TraceIdHelper;
 
 import java.util.concurrent.ConcurrentSkipListSet;
 

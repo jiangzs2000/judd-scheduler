@@ -69,7 +69,7 @@
             AND <![CDATA[    create_time >=#{startDate}]]>
         </if>
         <if test="endDate!=null and endDate.trim()!=''">
-            AND <![CDATA[    create_time <#{endDate}]]>
+            AND <![CDATA[    create_time <=#{endDate}]]>
         </if>
         <if test="search!=null and search.trim() != ''">
             AND (task_name LIKE CONCAT('%',#{search},'%')
@@ -92,7 +92,7 @@
             AND <![CDATA[    create_time >=#{startDate}]]>
         </if>
         <if test="endDate!=null and endDate.trim()!=''">
-            AND <![CDATA[    create_time <#{endDate}]]>
+            AND <![CDATA[    create_time <=#{endDate}]]>
         </if>
         <if test="search!=null and search.trim() != ''">
             AND (task_name LIKE CONCAT('%',#{search},'%')

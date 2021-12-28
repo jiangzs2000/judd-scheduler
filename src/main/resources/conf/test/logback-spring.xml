@@ -68,6 +68,7 @@
     </logger>
 
     <logger name="com.monefish.judd.scheduler" level="DEBUG" />
+	<logger name="com.monefish" level="DEBUG" />
 
     <root level="INFO">
         <appender-ref ref="FILE_INFO"/>

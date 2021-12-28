@@ -10,7 +10,7 @@ buildNumber.properties
 *.iml
 */*.iml
 .idea/
-.private-git-cmd.txt
+.private-git-cmd.cmd
 
 .classpath
 .project

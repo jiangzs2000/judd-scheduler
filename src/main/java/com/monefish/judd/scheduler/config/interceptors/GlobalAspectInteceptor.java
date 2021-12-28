@@ -5,9 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import com.monefish.judd.base.utils.RemoteIpUtil;
-import com.monefish.judd.base.StarterConstants;
-import com.monefish.judd.base.model.TraceIdHelper;
+import com.monefish.base.utils.RemoteIpUtil;
+import com.monefish.base.StarterConstants;
+import com.monefish.base.model.TraceIdHelper;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
